@@ -1,6 +1,5 @@
 
 define(function () {
-    console.log('in FormBase');
     var Form = function (form) {
         this.form = form;
         this.id = setTimeout('1');
@@ -25,9 +24,9 @@ define(function () {
         },
 
         /*
-         * ?Form??????
+         * 为Form添加表单项
          *
-         * @param {Field} ????field
+         * @param {Field} 添加的field
          */
         addField: function (field) {
             this[field.name] = field;

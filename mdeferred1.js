@@ -1,6 +1,5 @@
 
 define(function () {
-    alert('in mdeferred');
     var FieldDeferred = function (field, validateFunc) {
         this.chain = [];
         // 暂时没用
@@ -148,15 +147,17 @@ define(function () {
 
             var result = this.form.some.call(this.form, any, this, newdelays, ok, ng);
             if (result) {
-                ok();
+                ok.call(that);
             }
             else {
-                ng();
+                ng.call(that);
             }
             //console.log(this.delay);
         },
         // 有bug
         all: function (delays, ok, ng) {
+            console.log('all');
+            console.log(this);
             this.some(false, delays, ok, ng);
         },
         // 有bug
@@ -261,27 +262,9 @@ define(function () {
                 }
             }
             this.checkd = true;
-            // ��ǰfield����������ݼ�����������field���м��
+            // 当前field检查后主动根据检查结果对依赖的field进行检查
             this.firebedelay();
         }
     };
     return FieldDeferred;
 });
-
-/*
- var d = new FieldDeferred();
- //d.callback(1);
- d.addCallback(function (value) {
- var e = new FieldDeferred();
- alert(value);
- e.addCallback(function () {
- alert('3');
- });
- e.callback();
- return e;
- //alert(value);
- }).addCallback(function (value) {
- alert('2');
- });
- d.callback(1);
- */

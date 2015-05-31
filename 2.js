@@ -9,7 +9,7 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
     field1 = new FieldDeferred(field1, function (value, async) {
         var callback = async();
 
-        // ??check
+        // 正常check
 
         //this.some(true, [field2.name], function () {
         //    alert('field2 check');
@@ -31,12 +31,12 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
 
         }, 3000);
 
-        // ????check????????check???
+        // 假如check需要另一个check结果
         //if (form.getResult(field2.name) > 0) {
         // xxx
         //}
 
-        // ????check???????????check????????
+        // 假如check需要等待另一个check结束才进行
         // form[field.name].all(field2, field3);
         // field.all(field2, field3)
         //form[field2.name].addDelay(field1.name, function () {
@@ -44,12 +44,12 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
         //});
 
 
-        // bug ?????????check??????????check????
+        // bug 如果有两个check同事等待另一个check结束
         /*
          * form[field2].addCallback()
          * form[field3].addCallback()
          *
-         * ???field3??????????????????????н????????field2????н??
+         * 此时field3的结果变成了基于上一条语句的执行结果, 而不是基于field2的执行结果
          */
 
     });
@@ -81,7 +81,7 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
         // this.any([4,5], ok(), ng());
         // 替换回调函数
         // this.callback()
-        // 增加依赖(貌似不是很实用)
+        // 在当前依赖集的基础上增加依赖(貌似不是很实用)
         // this.any.append([1,2,3,4])
 
         result = {isPass: false};
@@ -105,8 +105,8 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
         }, function () {
             alert('field3 check ng')
         });
-        console.info('field2.bedelay', field2.bedelay);
-        console.info('field1.bedelay', field1.bedelay);
+        //console.info('field2.bedelay', field2.bedelay);
+        //console.info('field1.bedelay', field1.bedelay);
         setTimeout(function () {
 
             result = {
@@ -142,4 +142,3 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
     //field.start('blur');
 });
 
-//alert('3');
