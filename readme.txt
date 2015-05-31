@@ -1,6 +1,0 @@
-Git is a version control system.
-Git is free software.
-gaoxin
-gpl
-change
-Git tracks changes.
