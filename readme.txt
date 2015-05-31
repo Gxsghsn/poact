@@ -3,3 +3,4 @@ Git is free software.
 gaoxin
 gpl
 change
+Git tracks changes.
