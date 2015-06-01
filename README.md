@@ -1,5 +1,5 @@
 # poact
-使用方式:
+使用方式:(参见test.js)
     email:
     EventUtil.addHandler(field1.field, 'blur', function () {
             console.log(valid[8].check(field1.field));
