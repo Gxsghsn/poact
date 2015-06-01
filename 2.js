@@ -1,12 +1,11 @@
 
-require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
+require(['1', 'mdeferred1', 'FormBase', 'poact'], function (valid, FieldDeferred, Form, poact) {
 
     console.log(Form);
-    var form = document.getElementById('3');
-    form = new Form(form);
+    var form = poact.getElementById('3');
 
-    var field1 = document.getElementById('i1');
-    field1 = new FieldDeferred(field1, function (value, async) {
+    var field1 = poact.getElementById('i1');
+    field1.addValidateFunc(function (value, async) {
         var callback = async();
 
         // 正常check
@@ -55,8 +54,7 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
     });
     form.addField(field1);
 
-    var field2 = document.getElementById('i2');
-    field2 = new FieldDeferred(field2);
+    var field2 = poact.getElementById('i2');
     field2.addValidateFunc(function (value, async) {
         var callback = async();
 
@@ -96,8 +94,8 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
     form.addField(field2);
 
 
-    var field3 = document.getElementById('i3');
-    field3 = new FieldDeferred(field3, function (value, async) {
+    var field3 = poact.getElementById('i3');
+    field3.addValidateFunc(function (value, async) {
         var callback = async();
 
         this.all([field1.name], function () {
@@ -123,14 +121,15 @@ require(['1', 'mdeferred1', 'FormBase'], function (valid, FieldDeferred, Form) {
     //}, function () {
     //    alert('wrong');
     //});
-    field3.some(true, [field2.name], function () {
-        alert('field3 check ok')
-    }, function () {
-        alert('field3 check ng')
-    });
+
+    //field3.some(true, [field2.name], function () {
+    //    alert('field3 check ok')
+    //}, function () {
+    //    alert('field3 check ng')
+    //});
 
     EventUtil.addHandler(field1.field, 'blur', function () {
-        valid[4].check.call(form, field1);
+        console.log(valid[8].check(field1.field));
     });
     EventUtil.addHandler(field2.field, 'blur', function () {
         valid[4].check.call(form, field2);

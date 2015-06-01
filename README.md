@@ -1,5 +1,11 @@
 # poact
 使用方式:
+    email:
+    EventUtil.addHandler(field1.field, 'blur', function () {
+            console.log(valid[8].check(field1.field));
+        });
+
+
     1: 用户自定义函数：
         // 例1: 常规自定义函数
         var field2 = document.getElementById('i2');
@@ -60,4 +66,5 @@
             });
         form.addField(field3);
 
-        //
+        //all依赖或者any依赖的callback仍然是异步
+        // bug

@@ -106,7 +106,7 @@ define(function (require) {
 
                 return {
                     isPass: isPass,
-                    msg: !isPass ? field.title + '的格式不符合要求' : ''
+                    msg: !isPass ? field.title + '的格式不符合pattern要求' : ''
                 };
             }
         },
@@ -165,6 +165,146 @@ define(function (require) {
                 };
                 console.log(this);
                 return validateFunc.call(field, value, async);
+            }
+        },
+
+        {
+            name: 'time',
+            check: function (field) {
+                var value = field.value;
+                var isPass = true;
+                var pattern = new RegExp('(\\d{2}):(\\d{2})');
+                var result;
+
+                result = pattern.exec(value);
+                if ((!result || result[1] < 0 || result[1] > 23 || result[2] < 0 || result[2] > 59) && value !== '') {
+                    isPass = false;
+                }
+                return {
+                    isPass: isPass,
+                    msg: !isPass ? field.title + '的格式不符合time要求' : ''
+                }
+            }
+        },
+        {
+            name: 'month',
+            check: function (field) {
+                var value = field.value;
+                var isPass = true;
+                var pattern = new RegExp('(\\d{4})-(\\d{2})');
+                var result;
+
+                result = pattern.exec(value);
+                if ((!result || result[1] < 0 || result[2] < 0 || result[2] > 12) && value !== '') {
+                    isPass = false;
+                }
+                return {
+                    isPass: isPass,
+                    msg: !isPass ? field.title + '的格式不符合month要求' : ''
+                }
+            }
+        },
+
+        {
+            name: 'url',
+            check: function (field) {
+                var value = field.value;
+                var isPass = true;
+                var pattern = new RegExp('(\\d{4})-(\\d{2})');
+                var result;
+
+                if (!pattern.test(value) && value !== '') {
+                    isPass = false;
+                }
+                return {
+                    isPass: isPass,
+                    msg: !isPass ? field.title + '的格式不符合url要求' : ''
+                }
+            }
+        },
+        {
+            name: 'email',
+            check: function (field) {
+                var value = field.value;
+                var isPass = true;
+                var pattern = new RegExp('^[A-Za-z0-9]+@\\w+\\.[com|com\\.cn|net|cn|net\\.cn|org|biz|info|gov|gov\\.cn|edu|edu\\.cn]');
+                var result;
+
+                console.log(value);
+                if (!pattern.test(value) && value !== '') {
+                    alert('he');
+                    isPass = false;
+                }
+                return {
+                    isPass: isPass,
+                    msg: !isPass ? field.title + '的格式不符合email要求' : ''
+                }
+            }
+        },
+        {
+            name: 'date',
+            check: function (field) {
+                var value = field.value;
+                var isPass = true;
+                var pattern = new RegExp('^(\\d{4})-(\\d{2})-(\\d{2})');
+                var result;
+
+                result = pattern.exec(value);
+                if ((result === null || result[1] < 0 || result[2] < 0 || result[2] > 12) && value !== '') {
+                    isPass = false;
+                }
+                return {
+                    isPass: isPass,
+                    msg: !isPass ? field.title + '的格式不符合date要求' : ''
+                }
+            }
+        },
+        {
+            name: 'number',
+            check: function (field) {
+                var value = field.value;
+                var isPass = true;
+                var pattern = new RegExp('(\\d{4})-(\\d{2})');
+                var result;
+
+                value = parseInt(value);
+                var min = field.getAttribute('min'),
+                    max = field.getAttribute('max');
+
+                if (min || max) {
+                    if (!min) {
+                        min = 0;
+                    }
+                    if (!max) {
+                        max = 9007199254740992;
+                    }
+                    if (value > max || value < min) {
+                        isPass = false;
+                    }
+
+                }
+
+                return {
+                    isPass: isPass,
+                    msg: !isPass ? field.title + '的格式不符合number要求' : ''
+                }
+            }
+        },
+        {
+            name: 'datetime-local',
+            check: function (field) {
+                var value = field.value;
+                var isPass = true;
+                var pattern = new RegExp('^(\\d{4})-(\\d{2})-(\\d{2})');
+                var result;
+
+                if ((!pattern.test(value) || result[1] < 0 || result[2] < 0 || result[2] > 12) && value !== '') {
+                    isPass = false;
+                }
+                return {
+                    isPass: isPass,
+                    msg: !isPass ? field.title + '的格式不符合要求' : ''
+                }
             }
         }
     ];
