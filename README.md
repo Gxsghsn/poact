@@ -50,7 +50,7 @@
         field3.addValidateFunc(function (value, async) {
             var callback = async();
 
-            // all依赖
+            // any依赖
             this.any([field1.name, field2.name], function () {
                 alert('field3 check ok')
             }, function () {
