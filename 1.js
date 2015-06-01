@@ -17,7 +17,6 @@ define(function (require) {
                 var required = field.required;
                 var value = field.value;
                 var isPass = true;
-                console.log(value);
                 // 非必须表单项, 直接通过
                 // 直接从input标签上获取'required'属性的值有可能会因为浏览器的不同而不同, 有可能为'required'或''
                 if (required === null || required === 'false' || required === false) {
@@ -133,6 +132,7 @@ define(function (require) {
                 var form = this;
 
                 var async = function () {
+                    console.log(form);
                     form.asyncPending[name] = true; // 暂存正在异步验证中的信息
                     form.asyncPendingCount++; // 正在异步验证中的字段个数
 
@@ -149,13 +149,10 @@ define(function (require) {
                         // 但delete得使用会破坏JavaScript引擎的性能优化
                         form.asyncPendingCount--;
                         if (!result.isPass) {
-
                             form[name].fire('itemerror', field, result.msg);
                             form.addValidatedRecord(name, false);
                         }
                         else {
-                            console.log('pass');
-                            //console.log(form);
                             form[name].fire('itemsuccess', field);
                             form.addValidatedRecord(name, true);
                         }
@@ -163,7 +160,6 @@ define(function (require) {
 
                     return callback;
                 };
-                console.log(this);
                 return validateFunc.call(field, value, async);
             }
         },

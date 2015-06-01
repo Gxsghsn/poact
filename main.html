@@ -6,51 +6,46 @@
     <script src="eventUtil.js"></script>
     <script src="require.js" data-main="2.js"></script>
     <style>
-        #p1 {
-            width: 200px;
-            height: 200px;
-            background-color: red;
-            border-radius: 50%;
-        }
-
-        .container {
-            background-color: aquamarine;
-            width: 1000px;
-            margin: auto;
-            text-align: center;
-        }
-
-        #p2 {
-            margin: auto;
-            margin-top: 10px;
-        }
-
-        #out {
-            margin: auto;
-            margin-top: 20px;
-            /*width: 1000px;*/
-            /*height: 100px;*/
-            /*background-color: blue;*/
-        }
-
-        textarea {
-            padding: 10px;
-            font-weight: bold;
-            font-size: large;
-            font-family: monospace;
+        .check {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
 <form action="" id="3" name="foem1">
-    <input type="text" id="i1" name="i1name"/>
-    <input type="text" id="i2" name="i2name"/>
-    <input type="text" id="i3" name="i3name"/>
-    <p>123</p>
+    <div class="check">
+        <label for="i1">required:</label>
+        <input type="text" id="i1" name="i1name" required/>
+    </div>
+    <div class="check">
+        <label for="i2">maxLength:</label>
+        <input type="text" id="i2" name="i2name"/>
+    </div>
+    <div class="check">
+        <label for="i3">minLength:</label>
+        <input type="text" id="i3" name="i3name"/>
+    </div>
+    <div class="check">
+        <label for="i4">pattern:</label>
+        <input type="text" id="i4" name="i4name" pattern="\d{3}" />
+    </div>
+    <div class="check">
+        <label for="i5">validate:</label>
+        <input type="text" id="i5" name="i5name"/>
+    </div>
+    <div class="check">
+        <label for="i6">time:</label>
+        <input type="time" id="i6" name="i6name" />
+    </div>
+
+    <div class="check">
+        <label for="i7">email:</label>
+        <input type="email" id="i7" name="i7name" />
+    </div>
+
+    <input type="submit" value="提交"/>
 </form>
-
-
 
 
 <!--<input type="text" id="1"/>-->
@@ -68,7 +63,7 @@
 
 <script>
 
-    (function(){
+    (function () {
         var a = function () {
             alert('1');
         };

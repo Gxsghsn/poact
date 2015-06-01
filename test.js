@@ -1,7 +1,6 @@
 
-require(['1', 'mdeferred1', 'FormBase', 'poact'], function (valid, FieldDeferred, Form, poact) {
+require(['1', 'poact'], function (valid, poact) {
 
-    console.log(Form);
     var form = poact.getElementById('3');
 
     var field1 = poact.getElementById('i1');
@@ -98,13 +97,12 @@ require(['1', 'mdeferred1', 'FormBase', 'poact'], function (valid, FieldDeferred
     field3.addValidateFunc(function (value, async) {
         var callback = async();
 
-        this.all([field1.name], function () {
+        // all依赖
+        this.all([field1.name, field2.name], function () {
             alert('field3 check ok')
         }, function () {
             alert('field3 check ng')
         });
-        //console.info('field2.bedelay', field2.bedelay);
-        //console.info('field1.bedelay', field1.bedelay);
         setTimeout(function () {
 
             result = {
@@ -114,8 +112,8 @@ require(['1', 'mdeferred1', 'FormBase', 'poact'], function (valid, FieldDeferred
 
         }, 100);
     });
-
     form.addField(field3);
+
     //field3.addCallbacks(function () {
     //    alert('success');
     //}, function () {
@@ -129,13 +127,14 @@ require(['1', 'mdeferred1', 'FormBase', 'poact'], function (valid, FieldDeferred
     //});
 
     EventUtil.addHandler(field1.field, 'blur', function () {
-        console.log(valid[8].check(field1.field));
+        //console.log(poact.required);
+        console.log(poact.required(field1.field));
     });
     EventUtil.addHandler(field2.field, 'blur', function () {
-        valid[4].check.call(form, field2);
+        poact.validate.call(form, field2);
     });
     EventUtil.addHandler(field3.field, 'blur', function () {
-        valid[4].check.call(form, field3);
+        poact.validate.call(form, field3);
     });
 
     //field.start('blur');

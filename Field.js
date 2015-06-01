@@ -7,11 +7,8 @@ define(function () {
         //
         this.fired = -1;
         this.results = [];
-        this.paused = 0;
-        this.canceller = undefined;
         // 存放依赖当前field的其他field的name
         this.bedelay = {};
-        //
         // 纪录当前表单是否已经检查, 不再使用
         this.checkd = false;
         this.form = null;

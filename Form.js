@@ -34,6 +34,17 @@ define(function () {
             this.validateRecord[field.name] = true;
         },
 
+        /*
+         * 为Form移除表单项
+         *
+         * @param {Field} 移除的field
+         */
+        removeField: function (field) {
+            this[field.name] = null;
+            field.form = null;
+            this.validateRecord[field.name] = null;
+        },
+
         /**
          * 返回当前Form中记录的field的结果
          *

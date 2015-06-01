@@ -1,4 +1,4 @@
-define(['mdeferred1', 'FormBase'], function (FieldDeferred, Form) {
+define(['Field', 'Form', '1'], function (FieldDeferred, Form, valid) {
 
     function getElementById (id) {
         var target = document.getElementById(id);
@@ -12,7 +12,14 @@ define(['mdeferred1', 'FormBase'], function (FieldDeferred, Form) {
     }
 
 
-    return {
-        'getElementById': getElementById
-    }
+    var ret = {};
+    ret.getElementById = getElementById;
+    var item = ['required', 'maxLength', 'minLength', 'pattern', 'validate', 'time', 'month', 'url', 'email', 'date', 'number', 'datetime-local'];
+
+    item.forEach(function (value, index) {
+        ret[value] = function (field) {
+            return valid[index].check.call(this, field);
+        };
+    });
+    return ret;
 });
